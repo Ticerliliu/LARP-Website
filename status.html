@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Status Page</h1>
+    <nav>
+      <a href="index.html">Status</a>
+      <a href="about.html">About Us</a>
+      <a href="met.html">Meet the Team</a>
+      <a href="admin.html" class="admin-btn">Admin Panel</a>
+    </nav>
+  </header>
+
+  <section id="status">
+    <h2>Current Status</h2>
+    <div class="status-cards">
+      <div class="card">
+        <h3>API Status</h3>
+        <p id="api-status">Loading...</p>
+      </div>
+      <div class="card">
+        <h3>Database Status</h3>
+        <p id="db-status">Loading...</p>
+      </div>
+      <div class="card">
+        <h3>LARP Bot Status</h3>
+        <p id="bot-status">Loading...</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2>Operation History</h2>
+    <ul id="history-list">
+      <li>No history available.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Your Community. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load and display the current status from localStorage
+      if (localStorage.getItem('apiStatus')) {
+        document.getElementById('api-status').textContent = localStorage.getItem('apiStatus');
+      }
+      if (localStorage.getItem('dbStatus')) {
+        document.getElementById('db-status').textContent = localStorage.getItem('dbStatus');
+      }
+      if (localStorage.getItem('botStatus')) {
+        document.getElementById('bot-status').textContent = localStorage.getItem('botStatus');
+      }
+
+      // Load and display operation history
+      const historyList = document.getElementById('history-list');
+      const operationHistory = localStorage.getItem('operationHistory') ? JSON.parse(localStorage.getItem('operationHistory')) : [];
+
+      if (operationHistory.length === 0) {
+        historyList.innerHTML = '<li>No history available.</li>';
+      } else {
+        historyList.innerHTML = ''; // Clear previous items
+        operationHistory.forEach((record) => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${record.timestamp}: ${record.action}`;
+          historyList.appendChild(listItem);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

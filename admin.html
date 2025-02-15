@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Admin Panel</h1>
+    <nav>
+      <a href="index.html">Back to Status</a>
+      <button id="logout-btn" style="display:none;">Logout</button>
+    </nav>
+  </header>
+
+  <section id="login-section" style="display:none;">
+    <h2>Login</h2>
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" placeholder="Enter your username" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" required />
+
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <section id="update-status" style="display:none;">
+    <h2>Update System Status</h2>
+    <form id="status-form">
+      <label>API Status:</label>
+      <input type="text" id="api-status-input" placeholder="e.g., Online" required />
+
+      <label>Database Status:</label>
+      <input type="text" id="db-status-input" placeholder="e.g., Maintenance" required />
+
+      <label>Bot Status:</label>
+      <input type="text" id="bot-status-input" placeholder="e.g., Offline" required />
+
+      <label>Reason:</label>
+      <input type="text" id="reason-input" placeholder="e.g., Scheduled Update" required />
+
+      <button type="submit">Update Status</button>
+    </form>
+  </section>
+
+  <section id="operation-history" style="display:none;">
+    <h2>Operation History</h2>
+    <ul id="history-list"></ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Your Community. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Simulate login (hardcoded credentials for simplicity)
+    const validUsername = "admin";
+    const validPassword = "password123";
+
+    document.addEventListener("DOMContentLoaded", function() {
+      if (localStorage.getItem("loggedInUser")) {
+        showAdminPanel();  // Show the admin panel if the user is logged in
+      } else {
+        showLogin();  // Show login form if the user is not logged in
+      }
+
+      // Handle login form submission
+      document.getElementById("login-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (username === validUsername && password === validPassword) {
+          localStorage.setItem("loggedInUser", username);  // Store logged in user in localStorage
+          showAdminPanel();  // Show the admin panel on successful login
+        } else {
+          alert("Invalid credentials! Please try again.");
+        }
+      });
+
+      // Logout functionality
+      document.getElementById("logout-btn").addEventListener("click", function() {
+        localStorage.removeItem("loggedInUser");  // Clear user session from localStorage
+        showLogin();  // Show the login form again
+      });
+    });
+
+    function showAdminPanel() {
+      // Show the admin panel
+      document.getElementById("update-status").style.display = "block";
+      document.getElementById("operation-history").style.display = "block";
+      document.getElementById("logout-btn").style.display = "inline-block";
+      document.getElementById("login-section").style.display = "none";
+
+      loadHistory();
+    }
+
+    function showLogin() {
+      // Show the login form
+      document.getElementById("login-section").style.display = "block";
+      document.getElementById("update-status").style.display = "none";
+      document.getElementById("operation-history").style.display = "none";
+      document.getElementById("logout-btn").style.display = "none";
+    }
+
+    document.getElementById("status-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const apiStatus = document.getElementById("api-status-input").value;
+      const dbStatus = document.getElementById("db-status-input").value;
+      const botStatus = document.getElementById("bot-status-input").value;
+      const reason = document.getElementById("reason-input").value;
+      const timestamp = new Date().toLocaleString();
+
+      const operationHistory = JSON.parse(localStorage.getItem("operationHistory")) || [];
+      const caseId = generateCaseId();
+      const newHistoryItem = { caseId, apiStatus, dbStatus, botStatus, reason, timestamp };
+      operationHistory.push(newHistoryItem);
+      localStorage.setItem("operationHistory", JSON.stringify(operationHistory));
+
+      alert("Status updated and logged!");
+
+      updateStatusPage();
+      loadHistory();
+    });
+
+    function generateCaseId() {
+      return 'CASE-' + new Date().getTime();  // Generate a unique Case ID
+    }
+
+    function updateStatusPage() {
+      const operationHistory = JSON.parse(localStorage.getItem("operationHistory")) || [];
+      const latestRecord = operationHistory[operationHistory.length - 1];
+
+      if (latestRecord) {
+        document.getElementById("api-status").innerText = latestRecord.apiStatus;
+        document.getElementById("db-status").innerText = latestRecord.dbStatus;
+        document.getElementById("bot-status").innerText = latestRecord.botStatus;
+      }
+    }
+
+    function loadHistory() {
+      const operationHistory = JSON.parse(localStorage.getItem("operationHistory")) || [];
+      const historyList = document.getElementById("history-list");
+      historyList.innerHTML = "";
+
+      operationHistory.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+          <strong>${item.timestamp}</strong>: 
+          API Status - ${item.apiStatus}, 
+          DB Status - ${item.dbStatus}, 
+          Bot Status - ${item.botStatus} <br>
+          Reason: ${item.reason} <br>
+          <button onclick="editHistory('${item.caseId}')">Edit</button>
+          <button onclick="deleteHistory('${item.caseId}')">Delete</button>
+        `;
+        historyList.appendChild(listItem);
+      });
+    }
+
+    function editHistory(caseId) {
+      const operationHistory = JSON.parse(localStorage.getItem("operationHistory")) || [];
+      const itemToEdit = operationHistory.find(item => item.caseId === caseId);
+
+      if (itemToEdit) {
+        const newApiStatus = prompt('Edit API Status:', itemToEdit.apiStatus);
+        const newDbStatus = prompt('Edit Database Status:', itemToEdit.dbStatus);
+        const newBotStatus = prompt('Edit Bot Status:', itemToEdit.botStatus);
+        const newReason = prompt('Edit Reason:', itemToEdit.reason);
+
+        if (newApiStatus && newDbStatus && newBotStatus && newReason) {
+          itemToEdit.apiStatus = newApiStatus;
+          itemToEdit.dbStatus = newDbStatus;
+          itemToEdit.botStatus = newBotStatus;
+          itemToEdit.reason = newReason;
+
+          localStorage.setItem("operationHistory", JSON.stringify(operationHistory));
+          loadHistory();
+        }
+      }
+    }
+
+    function deleteHistory(caseId) {
+      const operationHistory = JSON.parse(localStorage.getItem("operationHistory")) || [];
+      const updatedHistory = operationHistory.filter(item => item.caseId !== caseId);
+
+      localStorage.setItem("operationHistory", JSON.stringify(updatedHistory));
+      loadHistory();
+    }
+  </script>
+</body>
+</html>

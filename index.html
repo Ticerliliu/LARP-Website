@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Status Page</h1>
+    <nav>
+      <a href="index.html">Status</a>
+      <a href="about.html">About Us</a>
+      <a href="met.html">Meet the Team</a>
+      <a href="admin.html" class="admin-btn">Admin Panel</a>
+    </nav>
+  </header>
+
+  <section id="status">
+    <h2>Current Status</h2>
+    <div class="status-cards">
+      <div class="card">
+        <h3>API Status</h3>
+        <p id="api-status">Loading...</p>
+      </div>
+      <div class="card">
+        <h3>Database Status</h3>
+        <p id="db-status">Loading...</p>
+      </div>
+      <div class="card">
+        <h3>LARP Bot Status</h3>
+        <p id="bot-status">Loading...</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2>Operation History</h2>
+    <ul id="history-list">
+      <li>No history available.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 LARP | Los Angeles Roleplay. All rights reserved.</p>
+  </footer>
+
+  <script>
+    window.onload = function() {
+      const operationHistory = JSON.parse(localStorage.getItem("operationHistory")) || [];
+
+      if (operationHistory.length > 0) {
+        const latestRecord = operationHistory[operationHistory.length - 1];
+
+        // Update the status cards with the latest status
+        document.getElementById("api-status").innerText = latestRecord.apiStatus;
+        document.getElementById("db-status").innerText = latestRecord.dbStatus;
+        document.getElementById("bot-status").innerText = latestRecord.botStatus;
+
+        // Update operation history list
+        const historyList = document.getElementById("history-list");
+        historyList.innerHTML = ""; // Clear existing history items
+
+        operationHistory.forEach(item => {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = `
+            <strong>${item.timestamp}</strong>: 
+            API Status - ${item.apiStatus}, 
+            DB Status - ${item.dbStatus}, 
+            Bot Status - ${item.botStatus} <br>
+            Reason: ${item.reason}
+          `;
+          historyList.appendChild(listItem);
+        });
+      } else {
+        document.getElementById("status").innerHTML = "<p>No status updates available.</p>";
+      }
+    };
+  </script>
+</body>
+</html>

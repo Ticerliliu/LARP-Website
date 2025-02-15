@@ -1,0 +1,343 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+    box-sizing: border-box;
+  }
+  
+  /* Header and Navigation */
+  header {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #1abc9c;
+  }
+  
+  .admin-btn {
+    font-weight: bold;
+    background-color: #e74c3c;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  .admin-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Section Styling */
+  section {
+    background: white;
+    padding: 20px;
+    margin: 30px auto;
+    width: 80%;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Status Cards */
+  .status-cards, .team-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+  }
+  
+  .card h3 {
+    margin: 10px 0;
+    color: #3498db;
+  }
+  
+  .card p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  .card img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  /* Form Styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2ecc71;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+  }
+  
+  /* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  header nav {
+    margin-top: 10px;
+  }
+  
+  header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+  }
+  
+  header nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Team Directory Section */
+  #team-directory {
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .team-member {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  
+  .team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .team-member h3 {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .team-member p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .team-member strong {
+    font-weight: bold;
+  }
+  
+  /* Placeholder for images */
+  .team-member img[src="images/placeholder.jpg"] {
+    background-color: #ccc;
+    text-align: center;
+    line-height: 100px;
+  }
+  
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  header nav {
+    margin-top: 10px;
+  }
+  
+  header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-weight: bold;
+  }
+  
+  header nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* About Section */
+  #about-introduction {
+    padding: 40px 20px;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 8px;
+  }
+  
+  #about-introduction h2 {
+    font-size: 28px;
+    color: #333;
+  }
+  
+  #mission,
+  #values,
+  #history {
+    padding: 30px 20px;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  .values-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .value {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin: 10px;
+    border-radius: 8px;
+  }
+  
+  .value h3 {
+    color: #333;
+  }
+  
+  #meet-the-team {
+    padding: 40px 20px;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 8px;
+  }
+  
+  #meet-the-team h2 {
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .team-member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .team-member h3 {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .team-member p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
